@@ -51,6 +51,7 @@ class GlobalManager {
 }
 const G = new GlobalManager();
 const R = new Regulator();
+G.textEntry.focus();
 
 function setMode() {
 	if (G.shomei.classList.contains("selected")) G.mode = 0;
