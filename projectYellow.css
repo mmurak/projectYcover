@@ -1,0 +1,32 @@
+body{
+	margin: 5px;
+}
+header{
+	position: sticky;
+	top: 0;
+	height: 60px;
+	width: 100%;
+	padding: 5px;
+	background-color: khaki;
+}
+button{
+	margin: 5px 0 0 0;
+}
+table, td{
+	border: 1px solid #333;
+	background: #eee;
+}
+table tr:nth-child(odd) td {
+	background: #fff;
+}
+@media screen and (max-width: 600px) {
+	#TitleEntry{
+		font-size: 150%;
+	}
+	button{
+		font-size: 150%;
+	}
+	header{
+		height: 100px;
+	}
+}
