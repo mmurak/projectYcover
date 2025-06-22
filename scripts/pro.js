@@ -14,6 +14,8 @@ class GlobalManager {
 		this.joukan = document.getElementById("Joukan");
 		this.chuukan = document.getElementById("Chuukan");
 		this.gekan = document.getElementById("Gekan");
+		this.seigo = document.getElementById("Seigo");
+		this.seigo.addEventListener("click", openErrata);
 		this.pageEntry = document.getElementById("PageEntry");
 		this.pageEntry.addEventListener("focus", () => {this.pageEntry.select();});
 		this.openPage = document.getElementById("OpenPage");
@@ -75,7 +77,7 @@ function searchIndex() {
 
 function openDirect() {
 	const vPage = G.pageEntry.value;
-	if (!vPage.match(/^[0-9]+$/))  return;
+	if (!vPage.match(/^[0-9０-９]+$/))  return;
 	let vol = 0;
 	if (G.joukan.classList.contains("selected")) vol = 0;
 	else if (G.chuukan.classList.contains("selected")) vol = 1;
@@ -125,6 +127,21 @@ function eraseTextEntry() {
 function erasePageEntry() {
 	G.pageEntry.value = "";
 	G.pageEntry.focus();
+}
+
+function openErrata() {
+	const page = G.pageEntry.value;
+	if (!page.match(/^[0-9０-９]+$/))  return;
+	let vol = 0;
+	if (G.joukan.classList.contains("selected")) vol = 0;
+	else if (G.chuukan.classList.contains("selected")) vol = 1;
+	else vol = 2;
+	let idx = errataIndex[vol][1].length - 1;
+	while ((idx >= 0) && (errataIndex[vol][1][idx] > Number(page))) {
+		idx--;
+	}
+	const ePage = errataIndex[vol][0] + idx;
+	windowOpen(G.idxURL + ePage, "正誤・追補画面");
 }
 
 function windowOpen(url, title) {
