@@ -47,6 +47,7 @@ class GlobalManager {
 			"https://dl.ndl.go.jp/pid/12450339/1/",
 		];
 		this.pageOffsets = [13, 10, 9];
+		this.pageLimits = [795, 787, 545];
 	}
 }
 const G = new GlobalManager();
@@ -83,6 +84,10 @@ function openDirect() {
 	if (G.joukan.classList.contains("selected")) vol = 0;
 	else if (G.chuukan.classList.contains("selected")) vol = 1;
 	else vol = 2;
+	if (Number(vPage) > G.pageLimits[vol]) {
+		alert("この巻で指定可能なページ数は" + G.pageLimits[vol] + "までです。");
+		return -1;
+	}
 	const rPage = Math.trunc(Number(vPage) / 2) + G.pageOffsets[vol];
 	windowOpen(G.urls[vol] + rPage, "検索結果");
 }
